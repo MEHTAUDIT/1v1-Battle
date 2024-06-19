@@ -1,4 +1,4 @@
-# views.py
+
 from auth_app.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -26,8 +26,10 @@ class RegisterView(APIView):
                 last_name=serializer.validated_data["last_name"],
                 email=serializer.validated_data["email"],
             )
+
             user.set_password(serializer.validated_data["password"])
             user.save()
+
             return Response(
                 {
                     "first_name": user.first_name,
@@ -43,9 +45,11 @@ class LoginView(APIView):
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
+
             email = serializer.validated_data["email"]
             password = serializer.validated_data["password"]
             user = User.objects.filter(email=email).first()
+
             if user is None:
                 return Response(
                     {"error": "User not found"}, status=status.HTTP_404_NOT_FOUND
