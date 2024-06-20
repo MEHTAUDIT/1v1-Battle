@@ -42,14 +42,15 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 ]
 
-APPEND_SLASH = True
-
 AUTH_USER_MODEL = 'auth_app.User'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    ],
 }
 
 MIDDLEWARE = [
