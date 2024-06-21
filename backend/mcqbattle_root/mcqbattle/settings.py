@@ -40,17 +40,19 @@ INSTALLED_APPS = [
     'rest_framework',
     'auth_app',
     'rest_framework_simplejwt',
+    'corsheaders',
+    'mcqs',
 ]
 
 AUTH_USER_MODEL = 'auth_app.User'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
 }
 
 MIDDLEWARE = [
@@ -61,9 +63,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'mcqbattle.urls'
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",  
+#     "https://yourfrontenddomain.com",
+# ]
 
 TEMPLATES = [
     {
